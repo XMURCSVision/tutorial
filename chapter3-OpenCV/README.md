@@ -72,6 +72,8 @@ src.copyTo(dst_3);  // 深拷贝
 
 ## tutorials
 
+以下内容参考[opencv-python中文教程](https://opencv-python-tutorials.readthedocs.io/zh/latest/1.%20OpenCV%E7%AE%80%E4%BB%8B/1.1.%20OpenCV-Python%E6%95%99%E7%A8%8B%E4%BB%8B%E7%BB%8D/)
+
 [section1：OpenCV中的Gui特性](section1/README.md)
 
 [section2：核心操作](section2/README.md)
