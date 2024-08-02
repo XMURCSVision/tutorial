@@ -59,15 +59,16 @@ cv::merge(channels, modifiedImage);
 
 如果要在图像周围创建边框，比如相框，可以使用`cv::copyMakeBorder()`。它在卷积运算，零填充等方面有更多的应用。
 ```cpp
-void cv::copyMakeBorder	(	InputArray 	src,
-                            OutputArray 	dst,
-                            int 	top,
-                            int 	bottom,
-                            int 	left,
-                            int 	right,
-                            int 	borderType,
-                            const Scalar & 	value = Scalar() 
-                            )		
+void cv::copyMakeBorder(
+    InputArray src, 
+    OutputArray dst,
+    int top, 
+    int bottom, 
+    int left, 
+    int right,
+    int borderType, 
+    const Scalar& value = Scalar()
+)
 ```
 
 ## 图像的算术运算
@@ -75,26 +76,28 @@ void cv::copyMakeBorder	(	InputArray 	src,
 - 图像的加法
 
 ```cpp
-void cv::add	(	InputArray 	src1,
-                    InputArray 	src2,
-                    OutputArray 	dst,
-                    InputArray 	mask = noArray(),
-                    int 	dtype = -1 
-                    )		
+void cv::add(
+    InputArray src1, 
+    InputArray src2,
+    OutputArray dst,
+    InputArray mask = noArray(),
+    int dtype = -1
+)
 ```
 
 - 图像的混合
 
 这其实也是加法，但是不同的是两幅图像的权重不同，这就会给人一种混合或者透明的感觉。图像混合的计算公式：`g(x) = (1−α)f0(x) + αf1(x)`。通过修改 α 的值（0 → 1），可以实现非常炫酷的混合。
 ```cpp
-void cv::addWeighted	(	InputArray 	src1,
-                            double 	alpha,
-                            InputArray 	src2,
-                            double 	beta,
-                            double 	gamma,
-                            OutputArray 	dst,
-                            int 	dtype = -1 
-                            )		
+void cv::addWeighted(
+    InputArray src1, 
+    double alpha,
+    InputArray src2, 
+    double beta,
+    double gamma, 
+    OutputArray dst,
+    int dtype = -1
+)
 ```
 
 - 图像按位操作

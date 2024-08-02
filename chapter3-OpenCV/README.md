@@ -79,3 +79,5 @@ src.copyTo(dst_3);  // 深拷贝
 [section2：核心操作](section2/README.md)
 
 [section3：OpenCV中的图像处理](section3/README.md)
+
+[section4：实战：装甲板识别](section4/README.md)

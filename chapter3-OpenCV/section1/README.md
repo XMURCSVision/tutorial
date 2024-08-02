@@ -108,79 +108,53 @@ cv::destroyAllWindows();
 
 - 线段
 ```cpp
-void cv::line	(	InputOutputArray 	img,
-                    Point 	pt1,
-                    Point 	pt2,
-                    const Scalar & 	color,
-                    int 	thickness = 1,
-                    int 	lineType = LINE_8,
-                    int 	shift = 0 
-                    )		
+void cv::line(
+    InputOutputArray img, Point pt1, Point pt2,
+    const Scalar &color, int thickness = 1, int lineType = LINE_8, int shift = 0
+);	
 ```
 
 - 矩形
 ```cpp
-void cv::rectangle	(	InputOutputArray 	img,
-                        Point 	pt1,
-                        Point 	pt2,
-                        const Scalar & 	color,
-                        int 	thickness = 1,
-                        int 	lineType = LINE_8,
-                        int 	shift = 0 
-                        )		
+void cv::rectangle(
+    InputOutputArray img, Point pt1, Point pt2,
+    const Scalar &color, int thickness = 1, int lineType = LINE_8, int shift = 0
+);
 ```
 
 - 圆形
 ```cpp
-void cv::circle	(	InputOutputArray 	img,
-                    Point 	center,
-                    int 	radius,
-                    const Scalar & 	color,
-                    int 	thickness = 1,
-                    int 	lineType = LINE_8,
-                    int 	shift = 0 
-                    )		
+void cv::circle(
+    InputOutputArray img, Point center, int radius,
+    const Scalar &color, int thickness = 1, int lineType = LINE_8, int shift = 0
+);
 ```
 
 - 椭圆
 ```cpp
-void cv::ellipse	(	InputOutputArray 	img,
-                        Point 	center,
-                        Size 	axes,
-                        double 	angle,
-                        double 	startAngle,
-                        double 	endAngle,
-                        const Scalar & 	color,
-                        int 	thickness = 1,
-                        int 	lineType = LINE_8,
-                        int 	shift = 0 
-                        )		
+void cv::ellipse(
+    InputOutputArray img, Point center, Size axes, double angle,
+    double startAngle, double endAngle,
+    const Scalar &color, int thickness = 1, int lineType = LINE_8, int shift = 0
+);
 ```
 
 - 多边形
 ```cpp
-void cv::polylines	(	InputOutputArray 	img,
-                        InputArrayOfArrays 	pts,
-                        bool 	isClosed,
-                        const Scalar & 	color,
-                        int 	thickness = 1,
-                        int 	lineType = LINE_8,
-                        int 	shift = 0 
-                        )		
+void cv::polylines(
+    InputOutputArray img, const std::vector<std::vector<Point>> &pts,
+    bool isClosed, const Scalar &color, int thickness = 1,
+    int lineType = LINE_8, int shift = 0
+);	
 ```
 
 - 文字
 ```cpp
-void cv::putText	(	InputOutputArray 	img,
-                        const String & 	text,
-                        Point 	org,
-                        int 	fontFace,
-                        double 	fontScale,
-                        Scalar 	color,
-                        int 	thickness = 1,
-                        int 	lineType = LINE_8,
-                        bool 	bottomLeftOrigin = false 
-                        )		
+void cv::putText(
+    InputOutputArray img, const std::string &text, Point org,
+    int fontFace, double fontScale, const Scalar &color,
+    int thickness = 1, int lineType = LINE_8, bool bottomLeftOrigin = false
+);
 ```
 
 ## Task
