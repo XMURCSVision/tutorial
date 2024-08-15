@@ -88,7 +88,6 @@ std::vector<Armor> detectArmors(const cv::Mat& img) {
   auto armors = detector_->detect(img);
 
   if (debug_) {
-    // TODO:drawing
     if (!armors.empty()) {
       auto all_num_img = detector_->getAllNumbersImage();
       cv::resize(all_num_img, all_num_img, cv::Size(120, 168));
