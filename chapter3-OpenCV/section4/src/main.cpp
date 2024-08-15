@@ -22,17 +22,22 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  // get parameters
+  config = YAML::LoadFile(std::string(PROJECT_SOURCE_DIR) +
+                          "/config/detect_params.yaml");
+
   // Detector
   detector_ = initDetector();
 
-  debug_ = true;  // TODO：从yaml文件读取
+  debug_ = config["debug"].as<bool>();
 
   cv::Mat frame;
   while (cap.read(frame)) {
+    cv::resize(frame, frame, cv::Size(), 0.5, 0.5);
+
     auto armors = detectArmors(frame);
 
-    cv::waitKey(0);
-    cv::imshow("frame", frame);
+    cv::waitKey(config["waitkey"].as<int>());
   }
 
   cap.release();
@@ -42,27 +47,37 @@ int main(int argc, char* argv[]) {
 }
 
 std::unique_ptr<Detector> initDetector() {
-  int binary_thres = 160;
-  auto detect_color = 0;
+  int binary_thres = config["binary_thres"].as<int>();
+  auto detect_color = config["detect_color"].as<int>();
   Detector::LightParams l_params = {
-      .min_ratio = 0.1, .max_ratio = 0.4, .max_angle = 40.0};
+      .min_ratio = config["light"][0]["min_ratio"].as<double>(),
+      .max_ratio = config["light"][1]["max_ratio"].as<double>(),
+      .max_angle = config["light"][2]["max_angle"].as<double>()};
 
-  Detector::ArmorParams a_params = {.min_light_ratio = 0.7,
-                                    .min_small_center_distance = 0.8,
-                                    .max_small_center_distance = 3.2,
-                                    .min_large_center_distance = 3.2,
-                                    .max_large_center_distance = 5.5,
-                                    .max_angle = 35.0};
+  Detector::ArmorParams a_params = {
+      .min_light_ratio = config["armor"][0]["min_light_ratio"].as<double>(),
+      .min_small_center_distance =
+          config["armor"][1]["min_small_center_distance"].as<double>(),
+      .max_small_center_distance =
+          config["armor"][2]["max_small_center_distance"].as<double>(),
+      .min_large_center_distance =
+          config["armor"][3]["min_large_center_distance"].as<double>(),
+      .max_large_center_distance =
+          config["armor"][4]["max_large_center_distance"].as<double>(),
+      .max_angle = config["armor"][5]["max_angle"].as<double>()};
 
   auto detector = std::make_unique<Detector>(binary_thres, detect_color,
                                              l_params, a_params);
 
   // Init classifier
-  auto model_path = "../model/mlp.onnx";
-  auto label_path = "../model/label.txt";
-  double threshold = 0.7;
+  auto model_path =
+      std::string(PROJECT_SOURCE_DIR) + config["model_path"].as<std::string>();
+  auto label_path =
+      std::string(PROJECT_SOURCE_DIR) + config["label_path"].as<std::string>();
+  double threshold = config["classifier_threshold"].as<double>();
   std::vector<std::string> ignore_classes =
-      std::vector<std::string>{"negative"};
+      config["ignore_classes"].as<std::vector<std::string>>();
+  ;
   detector->classifier = std::make_unique<NumberClassifier>(
       model_path, label_path, threshold, ignore_classes);
 
@@ -70,18 +85,13 @@ std::unique_ptr<Detector> initDetector() {
 }
 
 std::vector<Armor> detectArmors(const cv::Mat& img) {
-  // TODO:update params
-
   auto armors = detector_->detect(img);
 
   if (debug_) {
     // TODO:drawing
-    for (auto armor : armors) {
-      std::cout << "debug: " << armor.classfication_result << std::endl;
-    }
-
     if (!armors.empty()) {
       auto all_num_img = detector_->getAllNumbersImage();
+      cv::resize(all_num_img, all_num_img, cv::Size(120, 168));
       cv::imshow("all_num_img", all_num_img);
     }
 
