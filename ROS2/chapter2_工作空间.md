@@ -144,7 +144,7 @@ find_package找到的依赖项是供给CmakeLists的。
    find_package(ament_lint_auto REQUIRED)
    ament_lint_auto_find_test_dependencies()
    endif()
-
+   ```
 9. 调用ament_package()
 最后一步，调用ament_package()，以便ament工具处理包的安装、依赖解析等工作：
    ```cmake
@@ -157,6 +157,7 @@ find_package找到的依赖项是供给CmakeLists的。
    ```cpp
    #include "rclcpp/rclcpp.hpp"
    #include "std_msgs/msg/int32.hpp"
+   #include "std_msgs/msg/string.hpp"
    class MyNode : public rclcpp::Node
    {
    public:

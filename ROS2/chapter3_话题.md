@@ -56,6 +56,10 @@ x->data = "hello, RCS!"
     )
 
     ament_export_dependencies(rosidl_default_runtime)
+
+    install(DIRECTORY msg
+    DESTINATION share/${PROJECT_NAME}
+    )
     ```
     - rosidl_default_generators包包含了ROS 2的IDL（Interface Definition Language）接口生成工具。这些工具用于根据.msg、.srv、和.action文件生成对应的C++、Python等语言的代码，从而让自定义消息、服务和动作能够在你的节点中使用。
     - rosidl_default_runtime 是一个包含ROS 2运行时库的包，这些库支持自定义消息、服务和动作的运行时功能。它包括了消息序列化、反序列化等功能的运行时支持。
