@@ -61,9 +61,8 @@
     ```
 8. 修改Cmake文件，将launch目录下文件安装到编译生成的install目录下
     ```cmake
-    install(DIRECTORY msg
-    DESTINATION share/${PROJECT_NAME}
-    )
+    install(DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME})
     ```
 ## 添加参数&修改命名空间
 launch文件不仅可以启动指定节点，也可以向节点中传入参数和给节点以不同的命名空间。我们目前只需要学习传入参数的功能
